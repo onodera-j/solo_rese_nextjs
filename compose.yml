@@ -1,0 +1,60 @@
+version: "3.9"
+
+services:
+  # PHP（Laravel）
+  app:
+    build:
+      context: .
+      dockerfile: ./.docker/app/Dockerfile
+    working_dir: /var/www/src
+    command: php artisan serve --host=0.0.0.0 --port=8000
+    ports:
+      - "8000:8000"
+    volumes:
+      - type: bind
+        source: ./src
+        target: /var/www/src
+    depends_on:
+      - db
+
+  # MySQL
+  db:
+    build:
+      context: ./.docker/db
+      dockerfile: Dockerfile
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: testdb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      TZ: Asia/Tokyo
+    volumes:
+      - type: volume
+        source: db
+        target: /var/lib/mysql
+      - type: bind
+        source: ./.docker/db/my.conf
+        target: /etc/my.conf
+      - type: bind
+        source: ./.docker/db/init.sql
+        target: /docker-entrypoint-initdb.d/init.sql
+
+  # Next.js
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    command: npm run dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - type: bind
+        source: ./frontend
+        target: /app
+    depends_on:
+      - app
+
+volumes:
+  db:
