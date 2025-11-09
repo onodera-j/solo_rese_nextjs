@@ -10,3 +10,4 @@
 ### Nextjsとlaravelプロジェクトへアクセスできるか確認
     - Nextjs : http://localhost:3000
     - laravel : http://localhost:8000
+# rese_ver_nextjs
