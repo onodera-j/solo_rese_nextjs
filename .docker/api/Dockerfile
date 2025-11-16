@@ -18,6 +18,6 @@ RUN set -eux; \
 RUN ln -snf /usr/share/zoneinfo/${TZ} /etc/localtime && echo ${TZ} > /etc/timezone
 
 # PHP設定
-COPY ./.docker/app/php.ini /usr/local/etc/php/php.ini
+COPY ./.docker/api/php.ini /usr/local/etc/php/php.ini
 
 WORKDIR /var/www/src

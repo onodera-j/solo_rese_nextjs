@@ -2,22 +2,9 @@
 FROM node:22-slim
 
 # 作業ディレクトリの設定
-WORKDIR /app
-
-# package.jsonとpackage-lock.jsonをコピー
-COPY package*.json ./
-
-# 依存関係をインストール
-RUN npm install
-
-# ソースコードをコピー
+WORKDIR /app/frontend
+RUN apt-get update && apt-get install -y git vim
+RUN npm install -g pnpm@10.15.1
 COPY . .
-
-# ビルド
-RUN npm run build
-
-# ポートを公開
-EXPOSE 3000
-
-# Next.jsアプリケーションを起動
-CMD ["npm", "start"]
+RUN rm -r /app/frontend/node_modules
+RUN pnpm install

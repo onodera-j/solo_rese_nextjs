@@ -2,10 +2,10 @@ version: "3.9"
 
 services:
   # PHP（Laravel）
-  app:
+  api:
     build:
       context: .
-      dockerfile: ./.docker/app/Dockerfile
+      dockerfile: ./.docker/api/Dockerfile
     working_dir: /var/www/src
     command: php artisan serve --host=0.0.0.0 --port=8000
     ports:
@@ -46,15 +46,16 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-    command: npm run dev
+    working_dir: /app/frontend
+    command: pnpm dev
     ports:
       - "3000:3000"
     volumes:
       - type: bind
         source: ./frontend
-        target: /app
+        target: /app/frontend
     depends_on:
-      - app
+      - api
 
 volumes:
   db:
