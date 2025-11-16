@@ -19,6 +19,7 @@ services:
 
   # MySQL
   db:
+    image: mysql:8
     build:
       context: ./.docker/db
       dockerfile: Dockerfile

@@ -4,6 +4,16 @@
 ### githubからクローン
     git clone https://github.com/sakanadaketabetetai/rese_ver_nextjs.git
 
+### laravelの設定ファイルをコピー
+    ```
+        cd src
+        cp .env.exmple .env
+    ```
+### laravelのAPP_KEYを設定
+    ```
+        php artisan key:generate
+    ```
+
 ### dockerビルド操作
     docker-compose up -d --build
 
