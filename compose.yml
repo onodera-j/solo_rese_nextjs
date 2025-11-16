@@ -48,7 +48,7 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     working_dir: /app/frontend
-    command: pnpm dev
+    command: sh -c "pnpm install && pnpm dev"
     ports:
       - "3000:3000"
     volumes:
