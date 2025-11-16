@@ -9,6 +9,7 @@
     cp .env.exmple .env
 
 ### dockerビルド操作
+    cd ..
     docker-compose up -d --build
 
 ### laravelのAPP_KEYを設定
