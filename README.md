@@ -6,7 +6,7 @@
 
 ### laravelの設定ファイルをコピー
     cd src
-    cp .env.exmple .env
+    cp .env.example .env
 
 ### dockerビルド操作
     cd ..
